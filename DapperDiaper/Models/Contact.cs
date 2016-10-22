@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DapperDiaper
+namespace DapperDiaper.Models
 {
     public class Contact
     {
