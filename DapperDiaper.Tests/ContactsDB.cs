@@ -10,13 +10,16 @@ namespace DapperDiaper.Tests
 {
     public class ContactsDB : DbContext
     {
+        public ContactsDB() : base("ContactsDB") { }
+
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<State> States { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity().MapToStoredProcedures();
+            modelBuilder.Entity<Contact>().MapToStoredProcedures();
+
             base.OnModelCreating(modelBuilder);
         }
     }
