@@ -5,38 +5,22 @@ using DapperDiaper.Models;
 
 namespace DapperDiaper.Tests
 {
+    // Unit Test Naming Convention
+    // [UnitOfWork_StateUnderTest_ExpectedBehavior]
     // http://stackoverflow.com/questions/155436/unit-test-naming-best-practices
 
     [TestClass]
     public class EFCodeFirstTests
     {
-        private static Fixture _fixture;
+        private static Fixture _fixture = new Fixture();
         private static int _id;
-
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext testContext)
-        {
-            _fixture = new Fixture();
-        }
-
-        [TestMethod]
-        public void EFCodeFirst_CRUD()
-        {
-            EFCodeFirst_Insert_AssignIdentityToNewEntity();
-            EFCodeFirst_Find_RetrieveExistingEntity();
-            EFCodeFirst_Modify_UpdateExistingEntity();
-            EFCodeFirst_Delete_RemoveEntity();
-        }
 
         [TestMethod]
         public void EFCodeFirst_Insert_AssignIdentityToNewEntity()
         {
             // arrange
             var target = new ContactsDB();
-            var contact = _fixture.Build<Contact>()
-                .Without(c => c.Id)
-                .With(c => c.FirstName, "walter")
-                .Create();
+            var contact = _fixture.Build<Contact>().Without(c => c.Id).With(c => c.FirstName, "walter").Create();
 
             // act
             target.Contacts.Add(contact);
